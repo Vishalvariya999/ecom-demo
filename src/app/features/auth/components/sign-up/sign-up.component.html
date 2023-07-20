@@ -1,0 +1,163 @@
+<section class="h-100 gradient-form" style="background-color: #eee">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12">
+        <div class="card rounded-3 text-black">
+          <div class="row">
+            <div class="col-lg-6 d-flex align-items-center">
+              <img
+                class="p-3"
+                src="assets/images/login.jpg"
+                alt="photo"
+                width="100%"
+                height="100%"
+              />
+            </div>
+            <div class="col-lg-6">
+              <div class="card-body p-md-1 mx-md-4">
+                <div class="text-center">
+                  <h2 class="mt-4 border p-3 rounded mb-3">
+                    Registration User
+                  </h2>
+                </div>
+                <form class="row" [formGroup]="signForm">
+                  <div class="col-lg-12 mb-4">
+                    <label for="" class="form-label">Name</label>
+                    <input
+                      class="form-control form-control-lg"
+                      placeholder="Enter name"
+                      formControlName="name"
+                    />
+                    <small
+                      class="text-danger p-2"
+                      *ngIf="
+                        (frmControl['name'].touched &&
+                          frmControl['name'].errors &&
+                          frmControl['name'].errors['pattern']) ||
+                        (frmControl['name'].touched &&
+                          frmControl['name'].pristine) ||
+                        (isSubmited &&
+                          frmControl['name'].pristine &&
+                          frmControl['name'].invalid)
+                      "
+                      >Enter valid name</small
+                    >
+                  </div>
+                  <div class="col-lg-6 mb-4">
+                    <label for="" class="form-label">E-mail Address</label>
+                    <input
+                      class="form-control form-control-lg"
+                      placeholder="Enter email address"
+                      formControlName="email"
+                    />
+                    <small
+                      class="text-danger p-2"
+                      *ngIf="
+                        (frmControl['email'].touched &&
+                          frmControl['email'].errors &&
+                          frmControl['email'].errors['pattern']) ||
+                        (frmControl['email'].touched &&
+                          frmControl['email'].pristine) ||
+                        (isSubmited &&
+                          frmControl['email'].pristine &&
+                          frmControl['email'].invalid)
+                      "
+                      >Enter valid email</small
+                    >
+                  </div>
+                  <div class="col-lg-6 mb-4">
+                    <label for="" class="form-label">Phone</label>
+                    <input
+                      class="form-control form-control-lg"
+                      placeholder="Enter phone number"
+                      formControlName="phone"
+                      (keypress)="alphabateNotallowed($event)"
+                    />
+                    <small
+                      class="text-danger p-2"
+                      *ngIf="
+                        (frmControl['phone'].touched &&
+                          frmControl['phone'].errors &&
+                          frmControl['phone']) ||
+                        (frmControl['phone'].touched &&
+                          frmControl['phone'].pristine) ||
+                        (isSubmited &&
+                          frmControl['phone'].pristine &&
+                          frmControl['phone'].invalid)
+                      "
+                      >Enter valid phone number</small
+                    >
+                  </div>
+                  <div class="col-lg-12 mb-4">
+                    <label for="" class="form-label">Address</label>
+                    <textarea
+                      class="form-control form-control-lg"
+                      placeholder="Enter Address"
+                      formControlName="address"
+                    ></textarea>
+                    <small
+                      class="text-danger p-2"
+                      *ngIf="
+                        (frmControl['address'].touched &&
+                          frmControl['address'].errors &&
+                          frmControl['address']) ||
+                        (frmControl['address'].touched &&
+                          frmControl['address'].pristine) ||
+                        (isSubmited &&
+                          frmControl['address'].pristine &&
+                          frmControl['address'].invalid)
+                      "
+                      >Enter valid Address</small
+                    >
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label">Password</label>
+                    <input
+                      type="password"
+                      class="form-control form-control-lg"
+                      placeholder="Enter Your Password"
+                      formControlName="password"
+                    />
+                    <small
+                      class="text-danger p-2"
+                      *ngIf="
+                        (frmControl['password'].touched &&
+                          frmControl['password'].errors &&
+                          frmControl['password'].errors['minLength']) ||
+                        (frmControl['password'].touched &&
+                          frmControl['password'].pristine) ||
+                        (isSubmited &&
+                          frmControl['password'].pristine &&
+                          frmControl['password'].invalid)
+                      "
+                      >Enter valid passsword</small
+                    >
+                  </div>
+                  <div class="text-center pt-1 mb-2 pb-1">
+                    <button
+                      class="btn btn-lg btn-primary btn-block fa-lg gradient-custom-2 mb-3 w-100"
+                      type="button"
+                      (click)="onSignup()"
+                    >
+                      SignUp
+                    </button>
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-center pb-4"
+                  >
+                    <p class="mb-0 me-2">Already have an account ?</p>
+                    <a
+                      [routerLink]="'/auth/login'"
+                      class="text-decoration-none text-danger"
+                      >Login Here
+                    </a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

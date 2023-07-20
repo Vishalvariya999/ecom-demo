@@ -1,0 +1,115 @@
+<div class="container-fluid">
+  <div class="container p-5">
+    <div class="bg-white p-5 shadow rounded">
+      <div class="d-flex flex-row justify-content-between">
+        <div>
+          <h2 class="h2 p-2 text-center text-success fw-bold">
+            Customer Profile
+          </h2>
+        </div>
+        <div>
+          <a class="btn btn-lg btn-primary" (click)="changeMode()">Edit</a>
+        </div>
+      </div>
+      <hr />
+      <div class="col-lg-6">
+        <img
+          src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+          alt=""
+          width="90px"
+          style="border-radius: 50%"
+          class="shadow"
+        />
+      </div>
+      <form [formGroup]="frmEditData" class="mt-4 row">
+        <div class="form-group col-lg-12 mb-4">
+          <label for="" class="form-label mt-1 p-1 fs-4">Name :</label><br />
+          <span class="p-1 fs-4 text-success" *ngIf="!editMode">{{
+            userData?.name
+          }}</span>
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control form-control-lg mt-1"
+            *ngIf="editMode"
+          />
+        </div>
+        <hr />
+        <div class="form-group col-lg-6 mb-4">
+          <label for="" class="form-label mt-1 p-1 fs-4">E-mail :</label><br />
+          <span class="p-1 fs-4 text-success" *ngIf="!editMode">{{
+            userData?.email
+          }}</span>
+          <input
+            type="text"
+            formControlName="email"
+            class="form-control form-control-lg mt-1"
+            *ngIf="editMode"
+            readonly
+          />
+        </div>
+        <div class="form-group col-lg-6">
+          <label for="" class="form-label mt-1 p-1 fs-4">Phone :</label><br />
+          <span class="p-1 fs-4 text-success" *ngIf="!editMode">{{
+            userData?.phone
+          }}</span>
+          <input
+            type="text"
+            formControlName="phone"
+            class="form-control form-control-lg mt-1"
+            *ngIf="editMode"
+          />
+        </div>
+        <hr />
+        <div class="form-group col-lg-12 mb-4">
+          <label for="" class="form-label mt-1 p-1 fs-4">Address :</label><br />
+          <span class="p-1 fs-4 text-success" *ngIf="!editMode">{{
+            userData?.address
+          }}</span>
+          <textarea
+            type="text"
+            formControlName="address"
+            class="form-control form-control-lg mt-1"
+            *ngIf="editMode"
+          ></textarea>
+        </div>
+        <hr />
+        <div class="form-group col-lg-12 mb-4">
+          <label for="" class="form-label mt-1 p-1 fs-4">Password :</label
+          ><br />
+          <span class="p-1 fs-4 text-success" *ngIf="!editMode">******</span>
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control form-control-lg mt-1"
+            *ngIf="editMode"
+          />
+        </div>
+        <hr />
+        <div class="">
+          <button
+            *ngIf="editMode"
+            class="btn btn-lg btn-primary mx-2"
+            type="button"
+            (click)="updateProfile()"
+          >
+            <span
+              *ngIf="fetching"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            {{ fetching ? "Updating..." : "Update" }}
+          </button>
+          <button
+            *ngIf="editMode"
+            class="btn btn-lg btn-danger"
+            (click)="cancleEditMode()"
+          >
+            Cancle
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

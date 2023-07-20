@@ -1,0 +1,17 @@
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+  box-shadow: 0 0 2px inset red;
+}
+
+table,
+tr {
+  border: 1px solid #dddddd;
+  border-collapse: collapse;
+}
+.tbl-header {
+  width: calc(100% - 17px);
+  width: -webkit-calc(100% - 17px);
+  width: -moz-calc(100% - 17px);
+}

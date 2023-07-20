@@ -1,0 +1,100 @@
+<section class="h-100 gradient-form" style="background-color: #eee">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+                <div class="text-center">
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                    style="width: 185px"
+                    alt="logo"
+                  />
+                  <h2 class="mt-1 mb-3">Welcome to Login</h2>
+                  <hr />
+                </div>
+                <form [formGroup]="loginForm">
+                  <div class="form-outline mb-4 mt-1">
+                    <label for="" class="form-label">E-mail Address</label>
+                    <input
+                      class="form-control form-control-lg"
+                      placeholder="Enter Your email address"
+                      formControlName="email"
+                    />
+                    <small
+                      class="text-danger p-2"
+                      *ngIf="
+                        (frmControl['email'].touched &&
+                          frmControl['email'].errors &&
+                          frmControl['email'].errors['pattern']) ||
+                        (frmControl['email'].touched &&
+                          frmControl['email'].pristine) ||
+                        (isSubmited &&
+                          frmControl['email'].pristine &&
+                          frmControl['email'].invalid)
+                      "
+                      >Enter valid email address</small
+                    >
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label">Password</label>
+                    <input
+                      type="password"
+                      class="form-control form-control-lg"
+                      placeholder="Enter Your Password"
+                      formControlName="password"
+                    />
+                    <small
+                      class="text-danger p-2"
+                      *ngIf="
+                        (frmControl['password'].touched &&
+                          frmControl['password'].errors &&
+                          frmControl['password'].errors['pattern']) ||
+                        (frmControl['password'].touched &&
+                          frmControl['password'].pristine) ||
+                        (isSubmited &&
+                          frmControl['password'].pristine &&
+                          frmControl['password'].invalid)
+                      "
+                      >Enter valid email address</small
+                    >
+                  </div>
+                  <div class="text-center pt-1 mb-5 pb-1">
+                    <button
+                      class="btn btn-lg btn-primary btn-block fa-lg gradient-custom-2 mb-3 w-100"
+                      type="button"
+                      (click)="onLogin()"
+                    >
+                      Login
+                    </button>
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-center pb-4"
+                  >
+                    <p class="mb-0 me-2">Don't have an account?</p>
+                    <a
+                      [routerLink]="'/auth/signup'"
+                      class="text-decoration-none text-danger"
+                      >Create new</a
+                    >
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center">
+              <img
+                class="p-3"
+                src="assets/images/login.jpg"
+                alt="photo"
+                width="100%"
+                height="100%"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,275 @@
+<div class="container-fluid p-4">
+  <div class="row border rounded p-2">
+    <div class="col-lg-6 p-4">
+      <form
+        [formGroup]="frmProduct"
+        class="row g-3 border p-2 rounded bg-light"
+      >
+        <h2 class="text-center" *ngIf="!edit">Add Product</h2>
+        <h2 class="text-center" *ngIf="edit">Edit Product</h2>
+        <hr />
+        <div class="col-lg-12">
+          <label for="" class="form-label p-1">Name</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            placeholder="Enter Product Name"
+            formControlName="name"
+          />
+          <small
+            class="text-danger p-2"
+            *ngIf="
+              (frmControl['name'].touched &&
+                frmControl['name'].errors &&
+                frmControl['name'].errors['pattern']) ||
+              (frmControl['name'].touched && frmControl['name'].pristine) ||
+              (isSubmited &&
+                frmControl['name'].pristine &&
+                frmControl['name'].invalid)
+            "
+            >Enter valid name</small
+          >
+        </div>
+        <div class="col-lg-6">
+          <label for="" class="form-label p-1">Brand</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            placeholder="Enter Product Brand"
+            formControlName="brand"
+          />
+          <small
+            class="text-danger p-2"
+            *ngIf="
+              (frmControl['brand'].touched &&
+                frmControl['brand'].errors &&
+                frmControl['brand'].errors['pattern']) ||
+              (frmControl['brand'].touched && frmControl['brand'].pristine) ||
+              (isSubmited &&
+                frmControl['brand'].pristine &&
+                frmControl['brand'].invalid)
+            "
+            >Enter valid brand</small
+          >
+        </div>
+        <div class="col-lg-6">
+          <label for="" class="form-label p-1">Price</label>
+          <input
+            type="number"
+            class="form-control form-control-lg"
+            placeholder="Enter Product Price"
+            formControlName="price"
+          />
+          <small
+            class="text-danger p-2"
+            *ngIf="
+              (frmControl['price'].touched &&
+                frmControl['price'].errors &&
+                frmControl['price'].errors['pattern']) ||
+              (frmControl['price'].touched && frmControl['brand'].pristine) ||
+              (isSubmited &&
+                frmControl['price'].pristine &&
+                frmControl['price'].invalid)
+            "
+            >Enter valid price</small
+          >
+        </div>
+        <div class="col-lg-12">
+          <label for="" class="form-label p-1">Category</label>
+          <select
+            formControlName="category"
+            class="form-select form-select-lg"
+            name=""
+            id=""
+          >
+            <option value="" selected disabled>Select Category</option>
+            <option
+              *ngFor="let productCategory of prodCategories"
+              [value]="productCategory.name"
+            >
+              {{ productCategory.name }}
+            </option>
+          </select>
+          <small
+            class="text-danger p-2"
+            *ngIf="
+              (frmControl['category'].touched &&
+                frmControl['category'].errors &&
+                frmControl['category'].errors['pattern']) ||
+              (frmControl['category'].touched &&
+                frmControl['brand'].pristine) ||
+              (isSubmited &&
+                frmControl['category'].pristine &&
+                frmControl['category'].invalid)
+            "
+            >Select Category</small
+          >
+        </div>
+        <div class="col-lg-12">
+          <label for="" class="form-label p-1">Description</label>
+          <textarea
+            formControlName="description"
+            class="form-control"
+            rows="5"
+            placeholder="Enter Description"
+          ></textarea>
+          <small
+            class="text-danger p-2"
+            *ngIf="
+              (frmControl['description'].touched &&
+                frmControl['description'].errors &&
+                frmControl['description'].errors['pattern']) ||
+              (frmControl['description'].touched &&
+                frmControl['description'].pristine) ||
+              (isSubmited &&
+                frmControl['description'].pristine &&
+                frmControl['description'].invalid)
+            "
+            >Enter valid description</small
+          >
+        </div>
+        <div class="col-lg-12">
+          <!-- <img
+            [src]="path"
+            alt="img"
+            height="100px"
+            width="100px"
+            id="proImg"
+            class="p-2 mb-2 border rounded"
+          /> -->
+          <input
+            formControlName="image"
+            type="file"
+            class="form-control form-control-lg"
+            (change)="upload($event)"
+            accept="*.jpeg.jpg.png"
+          />
+          <small
+            class="text-danger p-2"
+            *ngIf="
+              (frmControl['image'].touched && frmControl['image'].errors) ||
+              (frmControl['image'].touched && frmControl['image'].pristine) ||
+              (isSubmited && frmControl['image'].invalid)
+            "
+            >Select Image</small
+          >
+          <!-- <input
+            type="text"
+            class="form-control form-control-lg"
+            placeholder="Enter Product Brand"
+            formControlName="image"
+          /> -->
+        </div>
+        <div class="col-lg-12">
+          <button
+            class="btn btn-lg btn-primary mt-1 mb-2"
+            (click)="onAddProduct()"
+          >
+            {{ btnName }}
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-6">
+      <h2 class="text-center">Products List</h2>
+      <hr />
+      <div style="width: 100%; overflow: auto; max-height: 680px">
+        <table class="table table-responsive table-striped border">
+          <thead class="table-dark sticky-top">
+            <tr>
+              <th *ngFor="let head of tblHeader">{{ head }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.brand }}</td>
+              <td class="text-danger">
+                {{ product.price | currency : "INR" : "symbol" }}
+              </td>
+              <td>{{ product.category }}</td>
+              <td class="w-25">
+                {{ product.description }}
+              </td>
+              <td>
+                <img
+                  [src]="product.image"
+                  alt="img"
+                  height="90px"
+                  width="90px"
+                />
+              </td>
+              <td>
+                <button
+                  class="btn btn-sm btn-success mx-2"
+                  (click)="editMode(product)"
+                >
+                  <fa-icon [icon]="faPen"></fa-icon>
+                </button>
+                <button
+                  class="btn btn-sm btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  (click)="sendId(product?.id)"
+                >
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="!products?.length">
+              <td class="text-danger text-center" colspan="8">
+                No Recored Found
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  <span class="text-danger"
+                    ><fa-icon [icon]="triangle"></fa-icon> Delete File
+                  </span>
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body text-danger fw-bold">
+                Are you sure delete recored ?
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancle
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  (click)="deleteProductCategory()"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
